@@ -9,7 +9,7 @@ import TermsAndCondition from "../Pages/TermsAndCondition/TermsAndCondition";
 
 export const router = createBrowserRouter([
     {path: '/', element: <Main></Main>, children: [
-        {path: '/', element: <Courses></Courses>, loader: ()=> fetch(`https://server-side-brown.vercel.app/courses`)},
+        {path: '/', element: <Courses></Courses>},
         {path: '/faq', element: <Faq></Faq>},
         {path: 'blog', element: <Blog></Blog>},
         {path: 'login', element: <LogIn></LogIn>},

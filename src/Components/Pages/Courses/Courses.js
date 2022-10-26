@@ -1,18 +1,22 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Col, Row } from 'react-bootstrap';
+import { Outlet } from 'react-router-dom';
+import RightSideContent from '../RightSideContent/RightSideContent';
+import LeftSideNav from '../../LeftSideNav/LeftSideNav';
 
 const Courses = () => {
-const courses = useLoaderData()
-console.log(courses);
+
     return (
         <div>
-            {
-                courses.map(course => 
-                <div>
-                    <h2>{course.name}</h2>
-                    <img src={course.image} alt="" />
-                </div>)
-            }
+             <Row>
+                <Col lg="4">
+                    <LeftSideNav></LeftSideNav>
+                </Col>
+                <Col lg = "8">
+                    <RightSideContent></RightSideContent>
+                    <Outlet></Outlet>
+                </Col>
+            </Row>
         </div>
     );
 };
