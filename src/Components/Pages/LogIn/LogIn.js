@@ -10,6 +10,7 @@ import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 const LogIn = () => {
     const {LogIn, SocialSingIn} = useContext(AuthContext)
     const [accepted, setAccepted] = useState(false)
+    const [error, setError] = useState('')
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
@@ -31,7 +32,7 @@ const LogIn = () => {
             navigate(from, {replace: true})
             form.reset()
             
-        }).catch(e => console.error(e))   
+        }).catch(e => setError(e.message))   
     }
 
         const handlercheckBox = (e)=>{
@@ -73,7 +74,8 @@ const LogIn = () => {
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check onClick={handlercheckBox} type="checkbox" label={<Link to='/terms' className='text-white'>Accept Terms & Condition</Link>}/>
                 </Form.Group>
-                <Button variant="primary" type="submit" disabled = {!accepted}>
+                <Form.Label className='text-danger'>{error}</Form.Label>
+                <Button variant="primary" className='d-block' type="submit" disabled = {!accepted}>
                     Log In
                 </Button>
                 <br />

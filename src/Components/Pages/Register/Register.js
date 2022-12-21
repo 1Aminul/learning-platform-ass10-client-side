@@ -10,6 +10,7 @@ import { AuthContext } from '../../Context/ContextAuth';
 const Register = () => {
 const {signUp, profileUpdate} = useContext(AuthContext)
 const [accepted, setAccepted] = useState(false)
+const [error, setError] = useState('')
     const handlersignUp = e =>{
         e.preventDefault()
         const form = e.target;
@@ -38,7 +39,7 @@ const [accepted, setAccepted] = useState(false)
                     .catch(e => console.error(e))
                     form.reset()
                 })
-                .catch(error => console.error(error))
+                .catch(e => setError(e.message))
             })
 
         console.log(name,email, password);
@@ -75,6 +76,7 @@ const [accepted, setAccepted] = useState(false)
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check onClick={handlercheckBox} type="checkbox" label={<Link to='/terms' className='text-white'>Accept Terms & Condition</Link>}/>
                 </Form.Group>
+                <Form.Label className='text-danger'>{error}</Form.Label>
                 <Button variant="primary" type="submit" disabled={!accepted}>
                     SignUp
                 </Button>
