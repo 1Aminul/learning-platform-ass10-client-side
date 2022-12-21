@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/ContextAuth';
 import {FaGoogle, FaGithub} from 'react-icons/fa'
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
@@ -10,8 +10,14 @@ import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 const LogIn = () => {
     const {LogIn, SocialSingIn} = useContext(AuthContext)
     const [accepted, setAccepted] = useState(false)
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
+
+
     let googleProvider = new GoogleAuthProvider();
     let githubProvider = new GithubAuthProvider()
+    
     const handlerlogIn = e =>{
         e.preventDefault()
         const form = e.target;
@@ -22,7 +28,9 @@ const LogIn = () => {
         .then(res=>{
             const user = res.user
             console.log(user);
+            navigate(from, {replace: true})
             form.reset()
+            
         }).catch(e => console.error(e))   
     }
 

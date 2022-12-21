@@ -7,6 +7,7 @@ const auth = getAuth(app)
 export const AuthContext = createContext()
 const ContextAuth = ({children}) => {
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     //sign up
     const signUp = (email, password)=>{
@@ -39,7 +40,9 @@ const ContextAuth = ({children}) => {
     //auth state change 
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, currentUser=>{
+            
             setUser(currentUser)
+            setLoading(false)
             
         })
         return ()=>{
@@ -51,7 +54,7 @@ const ContextAuth = ({children}) => {
 
 
 
-    const destructure = {user, signUp, profileUpdate, LogIn, LogOut, SocialSingIn}
+    const destructure = {user,loading, signUp, profileUpdate, LogIn, LogOut, SocialSingIn}
     return (
         <AuthContext.Provider value={destructure}>
             {children}

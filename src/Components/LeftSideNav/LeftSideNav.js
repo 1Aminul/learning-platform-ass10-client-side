@@ -1,11 +1,12 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 const LeftSideNav = () => {
     const [categories, setCategories] = useState([])
-    const navigate = useNavigate()
+    
 
     useEffect(()=>{
         fetch(`https://server-side-brown.vercel.app/category`)
@@ -13,19 +14,17 @@ const LeftSideNav = () => {
         .then(data => setCategories(data))
     }, [])
 
-    const handlerCourse = (id)=>{
-        navigate(`/courses/${id}`)
-    }
+    
 
 
     return (
-        <div className='border border-info '>
+        <div className='border border-info border-3 rounded-2 mt-3 ms-3 p-5 bg-dark text-white' style={{height: "60%", width: '25rem'}}>
             <h2>Courses Name</h2>
             {
                 categories.map(category =>
                     
-                 <div onClick={()=>handlerCourse(category.id)}>
-                   <h3>{category.name}</h3>
+                 <div className='border border-1 border-light mt-3 rounded px-2'>
+                   <Link className='text-decoration-none text-white' to = {`/category/${category.id}`}><h4>{category.name}</h4></Link>
                  </div>   
                 
                     )

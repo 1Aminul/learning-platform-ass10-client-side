@@ -68,3 +68,23 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+############# Here is my Bullet point" ##############################
+1.First i install react-app and other package
+2.I create firebase authentication register and project
+3.I create login process with email and password, Google, Github
+4.I make a fakedb api server site
+5.fetch data dynamicaly
+6.if you click logo you go to home page where in 6 card and course name
+7.Each card details button and course name dynamicaly set, if you click you go to category page there i was show header name and picture and course detail and 4 card about the course
+8.under the details page get premium acces button, if you click the button you go to login page because this page is private route.after you login you redirect the checkoutpage.
+9.I create colorful navbar and this nav bar is responsive and hole website was responsive.
+10. In blog page i also create 4 question answer by react-bootstrap accordian.
+11. this is my server site repository link: https://github.com/programming-hero-web-course1/b610-lerning-platform-server-side-1Aminul
+12. this is my sever site live link: https://server-side-brown.vercel.app/courses
+13. this is my live link: https://b6-learning-platform-ass10-1aminul.netlify.app/
+14. i can not create pdf because pdf package not install my project. please check images folder my error image
+15. i can not create toggle button in my project beacuse react theme toggle button cannot install
+

@@ -14,23 +14,35 @@ const [accepted, setAccepted] = useState(false)
         e.preventDefault()
         const form = e.target;
         const name = form.name.value;
-        const photourl = form.photourl.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, photourl, email, password);
+        
 
-        signUp(email, password)
-        .then(res=>{
-            const user = res.user
-            console.log(user);
-            profileUpdate(name, photourl)
-            .then(()=>{
-                toast.success('Your profile is updated')
+        const formData = new FormData();
+        formData.append("image", form.photourl.files[0])
+        const imghostkey = process.env.REACT_APP_image_apiKey
+
+        fetch(`https://api.imgbb.com/1/upload?key=${imghostkey}`, {
+            method: "POST",
+            body: formData,
+        }).then(res => res.json())
+            .then(datas => {
+                signUp(email, password)
+                .then(res=>{
+                    const user = res.user
+                    console.log(user);
+                    profileUpdate(name, datas.data.display_url)
+                    .then(()=>{
+                        toast.success('Your profile is updated')
+                    })
+                    .catch(e => console.error(e))
+                    form.reset()
+                })
+                .catch(error => console.error(error))
             })
-            .catch(e => console.error(e))
-            form.reset()
-        })
-        .catch(error => console.error(error))
+
+        console.log(name,email, password);
+        
     }
 
     const handlercheckBox = (e)=>{
@@ -49,7 +61,7 @@ const [accepted, setAccepted] = useState(false)
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Photo URL</Form.Label>
-                    <Form.Control  name='photourl' type="text" placeholder="Photo URL" required/>   
+                    <Form.Control  name='photourl' type="file" placeholder="Photo URL" required/>   
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>

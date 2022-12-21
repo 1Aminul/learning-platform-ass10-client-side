@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/ContextAuth';
 import { Button } from 'react-bootstrap';
 import {FaUser} from 'react-icons/fa'
+import LeftSideNav from '../../LeftSideNav/LeftSideNav';
 
 const Header = () => {
     const {user, LogOut} = useContext(AuthContext)
@@ -13,7 +14,7 @@ const Header = () => {
     
 
     return (
-        <Navbar className='mx-3' expand="lg">
+        <Navbar className='mx-3 bg-warning px-3 rounded' expand="lg">
         
                 <Navbar><Link className='text-decoration-none' to="/"><img src={logo} className="img-fluid" style={{width: "14rem"}} alt="this is logo" /><span className='text-secondary fw-bolder fs-3'></span></Link></Navbar>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -36,13 +37,15 @@ const Header = () => {
                     {
                         (user?.photoURL || user?.uid) ? 
                         <span>
-                        <span> {user?.displayName} </span>
-                        <img src= {user?.photoURL}  className='img-fluid rounded-circle' style={{width: "3rem"}} />
+                        
+                        <img title={user?.email} src= {user?.photoURL}  className='img-fluid rounded-circle' style={{width: "2rem"}} alt = "this is user" />
                         </span> : <><FaUser></FaUser></>
                     }
                 </nav>
                 </Nav>
-
+                <Nav className='d-lg-none'>
+                    <LeftSideNav></LeftSideNav>
+                </Nav>
                 
                 </Navbar.Collapse>
         
